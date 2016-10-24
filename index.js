@@ -56,6 +56,6 @@ app.use('/emails', email);
 
 app.use('/public', express.static('public'))
 
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
     console.log('App listening on port 3000!');
 });
