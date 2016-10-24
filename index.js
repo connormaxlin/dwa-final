@@ -27,14 +27,11 @@ app.get('/secondEmail', function(req, res) {
 
 app.get('/complete', function(req, res) {
     var query = Email.find({}, null, { limit: 2, sort: { 'epoch': -1 } });
-    console.log(1)
     query.exec(function(err, docs) {
-        console.log(docs)
         var emails = {
-            user_email: docs[0].user_email, 
+            user_email: docs[0].user_email,
             otherEmail: docs[1].user_email
         }
-        console.log('AlexLee')
         res.render('complete', emails)
     });
 });
@@ -43,7 +40,7 @@ app.get('/status', function(req, res) {
     var query = Email.find({}, null, { limit: 2, sort: { 'epoch': -1 } });
     query.exec(function(err, docs) {
         var emails = {
-            user_email: docs[0].user_email, 
+            user_email: docs[0].user_email,
             otherEmail: docs[1].user_email
         }
         res.render('status', emails)
