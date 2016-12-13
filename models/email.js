@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var emailSchema = new Schema({
-    user_email: String,
-    otherEmail: String
+var gAuth = new Schema({
+    user1Events: [Date],
+    user2Events: [Date]
 });
 
-var Email = mongoose.model('Email', emailSchema);
+var gAuthModel = mongoose.model('gAuth', gAuth);
 
-module.exports = Email;
+module.exports = gAuthModel;

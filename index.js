@@ -13,15 +13,17 @@ Mongoose.connect(process.env.DB_URL);
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 
 app.get('/', function(req, res) {
     res.render('index');
 });
 
 // TESTING LINKS ----------------------------------------------------
-app.get('/secondEmail', function(req, res) {
+app.get('/secondEmail/:id', function(req, res) {
+    console.log(res.locals);
     res.render('secondEmail');
 });
 
@@ -46,6 +48,14 @@ app.get('/status', function(req, res) {
         res.render('status', emails)
     });
 });
+
+app.get('/:id', function(req, res){
+  Email.findById(req.params.id, function(err, data){
+    if(data) {
+      res.render('index', {user1Token: data.user1Token});
+    }
+  })
+})
 // END --------------------------------------------------------------
 
 var email = require('./routes/emails');
